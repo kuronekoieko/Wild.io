@@ -14,6 +14,11 @@ public class BasePlayerController : BaseCharactorController
             .AddTo(this.gameObject);
     }
 
+    public override void OnUpdate()
+    {
+
+    }
+
     void OnCollisionEnter(Collision col)
     {
         var colCharactor = col.gameObject.GetComponent<BaseCharactorController>();
@@ -23,19 +28,13 @@ public class BasePlayerController : BaseCharactorController
         colCharactor.Killed();
     }
 
-    public override void OnUpdate()
-    {
-
-    }
-
     void CheckSizeUp()
     {
         int eatenCountToNextSize = PlayerSizeSettingSO.i.datas[base.size].eatenCountToNextSize;
-        Debug.Log(eatenCountToNextSize);
+
         if (eatenCount < eatenCountToNextSize) { return; }
 
         size++;
         transform.localScale *= 2;
     }
-
 }

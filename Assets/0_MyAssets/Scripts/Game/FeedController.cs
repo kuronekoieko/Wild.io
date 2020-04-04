@@ -5,13 +5,13 @@ using UnityEngine;
 public class FeedController : BaseCharactorController
 {
 
-    void Start()
+    public override void OnStart()
     {
 
     }
 
 
-    void Update()
+    public override void OnUpdate()
     {
 
     }
