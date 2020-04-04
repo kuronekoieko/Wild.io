@@ -13,6 +13,6 @@ public class Variables : MonoBehaviour
     public static ScreenState screenState;
     public static GameState gameState;
     public static float timer;
-    public static int[] eatenCounts;
+    public static PlayerProperty[] playerProperties;
     public static int playerCount;
 }

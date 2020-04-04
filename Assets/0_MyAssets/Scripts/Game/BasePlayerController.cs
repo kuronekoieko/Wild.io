@@ -12,7 +12,7 @@ public class BasePlayerController : BaseCharactorController
     public override void OnStart()
     {
         base.size = 0;
-        this.ObserveEveryValueChanged(count => Variables.eatenCounts[playerIndex])
+        this.ObserveEveryValueChanged(count => Variables.playerProperties[playerIndex].eatenCount)
             .Subscribe(count => CheckSizeUp(count))
             .AddTo(this.gameObject);
         rb = GetComponent<Rigidbody>();
@@ -38,7 +38,7 @@ public class BasePlayerController : BaseCharactorController
         //おなじだと両方消えるので
         if (colCharactor.size >= base.size) { return; }
 
-        Variables.eatenCounts[playerIndex]++;
+        Variables.playerProperties[playerIndex].eatenCount++;
         colCharactor.Killed();
     }
 

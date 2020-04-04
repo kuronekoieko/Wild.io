@@ -16,7 +16,13 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Variables.playerCount = playerPossitionsParent.childCount;
-        Variables.eatenCounts = new int[Variables.playerCount];
+        Variables.playerProperties = new PlayerProperty[Variables.playerCount];
+        for (int i = 0; i < Variables.playerProperties.Length; i++)
+        {
+            Variables.playerProperties[i] = new PlayerProperty();
+            Variables.playerProperties[i].name = "Player " + i;
+        }
+
         playerPoints = new Transform[Variables.playerCount];
         for (int i = 0; i < playerPoints.Length; i++)
         {
