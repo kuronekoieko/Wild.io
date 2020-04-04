@@ -13,6 +13,7 @@ using UniRx;
 public class GameCanvasManager : BaseCanvasManager
 {
     [SerializeField] Text timerText;
+    [SerializeField] Text eatenCountText;
 
     public readonly ScreenState thisScreen = ScreenState.Game;
 
@@ -22,6 +23,10 @@ public class GameCanvasManager : BaseCanvasManager
         base.SetScreenAction(thisScreen: thisScreen);
         this.ObserveEveryValueChanged(timer => Variables.timer)
             .Subscribe(_ => { SetTimeCountText(); })
+            .AddTo(this.gameObject);
+
+        this.ObserveEveryValueChanged(count => Variables.playerProperties[0].eatenCount)
+            .Subscribe(count => eatenCountText.text = "★ " + count)
             .AddTo(this.gameObject);
 
         gameObject.SetActive(true);
