@@ -48,7 +48,7 @@ public class DebugCanvasManager : BaseCanvasManager
 
 
         //適用時に好きな画面に遷移するように書き換えてOK
-        Variables.screenState = ScreenState.INITIALIZE;
+        Variables.screenState = ScreenState.Start;
         Close();
     }
 

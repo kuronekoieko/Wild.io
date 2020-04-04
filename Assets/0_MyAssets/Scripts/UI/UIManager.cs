@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 画面UIの一括管理
@@ -10,6 +11,17 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] RectTransform canvasesPatent;
     BaseCanvasManager[] canvases;
+
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void RuntimeInitializeApplication()
+    {
+        //ここが呼ばれてからStart()が呼ばれる
+        SceneManager.LoadScene("UIScene");
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
+    }
+
+
     void Start()
     {
         canvases = new BaseCanvasManager[canvasesPatent.childCount];
@@ -19,6 +31,7 @@ public class UIManager : MonoBehaviour
             if (canvases[i] == null) { continue; }
             canvases[i].OnStart();
         }
+        Variables.screenState = ScreenState.Start;
     }
 
     void OnUpdate(ScreenState currentScreen)

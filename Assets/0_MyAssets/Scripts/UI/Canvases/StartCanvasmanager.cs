@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
-public class HomeCanvasManager : BaseCanvasManager
+public class StartCanvasmanager : BaseCanvasManager
 {
+
     [SerializeField] Button startButton;
-    public readonly ScreenState thisScreen = ScreenState.HOME;
+    public readonly ScreenState thisScreen = ScreenState.Start;
 
 
     public override void OnStart()
     {
         base.SetScreenAction(thisScreen: thisScreen);
-
         startButton.onClick.AddListener(OnClickStartButton);
     }
 
@@ -34,6 +35,6 @@ public class HomeCanvasManager : BaseCanvasManager
 
     void OnClickStartButton()
     {
-        Variables.screenState = ScreenState.GAME;
+        Variables.screenState = ScreenState.Game;
     }
 }

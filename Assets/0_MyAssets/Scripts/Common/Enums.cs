@@ -3,12 +3,9 @@ enumはここにまとめておく
 */
 public enum ScreenState
 {
-    INITIALIZE,
-    GAME,
-    LOGIN,
-    CLEAR,
-    FAILED,
-    HOME,
+    Start,
+    Game,
+    Result
 }
 
 public enum GameState

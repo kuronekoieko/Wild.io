@@ -40,7 +40,7 @@ public class CoinGetAnim : MonoBehaviour
         })
         .Append(DOVirtual.DelayedCall(1f, () =>
         {
-            Variables.screenState = ScreenState.GAME;
+            Variables.screenState = ScreenState.Game;
         }));
     }
 

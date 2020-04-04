@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
         _cameraController.OnStart(_playerController.transform.position);
         _playerController.OnStart();
         _feedManager.OnStart();
+        Variables.timer = Values.TIME_LIMIT;
     }
 
     void Update()
@@ -21,5 +22,10 @@ public class GameManager : MonoBehaviour
         _cameraController.FollowTarget(_playerController.transform.position);
         _playerController.OnUpdate();
         _feedManager.OnUpdate();
+        Variables.timer -= Time.deltaTime;
+        if (Variables.timer < 0)
+        {
+            Variables.screenState = ScreenState.Result;
+        }
     }
 }

@@ -18,4 +18,5 @@ public class Variables : MonoBehaviour
         get { return _currentstageIndex; }
     }
     private static int _currentstageIndex;
+    public static float timer;
 }

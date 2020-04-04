@@ -71,24 +71,7 @@ namespace UnityTemplate
             return udt;
         }
 
-        /// <summary>
-        /// 前回の受け取りから24時間経っていたら、ログインボーナス画面を開く
-        /// </summary>
-        public static void OpenLoginBonus()
-        {
-            DateTime receivedDateTime = Utils.UserDateTimeToDateTime(SaveData.i.receivedLoginBonusUserDateTime);
-            if (isOpenLoginBonus(DateTime.Now, receivedDateTime))
-            {
-                Variables.screenState = ScreenState.LOGIN;
-            }
-        }
 
-        private static bool isOpenLoginBonus(DateTime nowDateTime, DateTime receivedDateTime)
-        {
-            // "1日0時間0分0秒"のTimeSpanを作成
-            TimeSpan timeSpan = new TimeSpan(1, 0, 0, 0);
-            return receivedDateTime + timeSpan <= nowDateTime;
-        }
     }
 }
 

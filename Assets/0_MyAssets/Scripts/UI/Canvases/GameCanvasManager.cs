@@ -12,20 +12,12 @@ using UniRx;
 /// </summary>
 public class GameCanvasManager : BaseCanvasManager
 {
-    [SerializeField] Button clearButton;
-    [SerializeField] Button failButton;
-    [SerializeField] Button loginButton;
-    [SerializeField] Button homeButton;
     [SerializeField] Text stageNumText;
 
-    public readonly ScreenState thisScreen = ScreenState.GAME;
+    public readonly ScreenState thisScreen = ScreenState.Game;
 
     public override void OnStart()
     {
-        clearButton.onClick.AddListener(() => { Variables.screenState = ScreenState.CLEAR; });
-        failButton.onClick.AddListener(() => { Variables.screenState = ScreenState.FAILED; });
-        loginButton.onClick.AddListener(() => { Variables.screenState = ScreenState.LOGIN; });
-        homeButton.onClick.AddListener(() => { Variables.screenState = ScreenState.HOME; });
 
         base.SetScreenAction(thisScreen: thisScreen);
 
