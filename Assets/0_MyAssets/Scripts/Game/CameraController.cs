@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System.Linq;
 
 /// <summary>
 /// Unityで解像度に合わせて画面のサイズを自動調整する
@@ -11,6 +12,7 @@ public class CameraController : MonoBehaviour
 {
     Vector3 vecFromPlayerToCamera = new Vector3(0, 40, -40);
     float nFocalLength;
+    int maxSize;
 
     public void OnStart(PlayerController player)
     {
@@ -18,14 +20,13 @@ public class CameraController : MonoBehaviour
             .Subscribe(size => CheckSizeUp(size))
             .AddTo(this.gameObject);
 
-        //distanceToPlayer = transform.position - playerPos;
-
-
+        maxSize = Variables.playerSizes.Last().size;
         transform.position = player.transform.position + vecFromPlayerToCamera.normalized * nFocalLength;
     }
 
     void CheckSizeUp(int size)
     {
+        if (size > maxSize) { return; }
         float aperture = Variables.playerSizes[size].cameraAperture;
         nFocalLength = focalLength(Camera.main.fieldOfView, aperture);
     }
@@ -33,15 +34,6 @@ public class CameraController : MonoBehaviour
 
     public void FollowTarget(Vector3 playerPos)
     {
-
-        /*  if (apertureDic.TryGetValue(Variables.humanCount, out float aperture))
-                {
-                    float f = focalLength(Camera.main.fieldOfView, aperture);
-                    DOTween.To(() => nFocalLength, (x) => nFocalLength = x, f, 0.5f);
-                }*/
-
-
-        // transform.position = playerPos + distanceToPlayer.normalized * nFocalLength;
         transform.position = playerPos + vecFromPlayerToCamera.normalized * nFocalLength;
     }
 

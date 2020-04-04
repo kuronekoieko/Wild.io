@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-
+using System.Linq;
 public class BasePlayerController : BaseCharactorController
 {
     protected int playerIndex;
     protected Rigidbody rb;
     float walkSpeed = 600f;
     protected Vector3 walkVec;
+    int maxSize;
+
     public override void OnStart()
     {
         base.size = 0;
@@ -17,6 +19,7 @@ public class BasePlayerController : BaseCharactorController
             .AddTo(this.gameObject);
         rb = GetComponent<Rigidbody>();
         transform.localScale = Vector3.one;
+        maxSize = Variables.playerSizes.Last().size;
     }
 
     public override void OnUpdate()
@@ -47,6 +50,7 @@ public class BasePlayerController : BaseCharactorController
 
     void CheckSizeUp(int eatenCount)
     {
+        if (base.size > maxSize) { return; }
         int eatenCountToNextSize = Variables.playerSizes[base.size].eatenCountToNextSize;
         if (eatenCount < eatenCountToNextSize) { return; }
 
