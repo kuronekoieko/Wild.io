@@ -16,7 +16,10 @@ public class FeedManager : MonoBehaviour
 
     public void OnUpdate()
     {
-
+        for (int i = 0; i < feedControllers.Length; i++)
+        {
+            feedControllers[i].OnUpdate();
+        }
     }
 
     void FeedGenerator()

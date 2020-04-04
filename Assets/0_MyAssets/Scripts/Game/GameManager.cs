@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform playerPossitionsParent;
     Transform[] playerPoints;
     public static GameManager i;
+    public FeedManager feedManager { get { return _feedManager; } }
 
     void Awake()
     {
