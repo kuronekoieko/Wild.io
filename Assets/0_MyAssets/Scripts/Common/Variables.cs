@@ -14,4 +14,5 @@ public class Variables : MonoBehaviour
     public static GameState gameState;
     public static float timer;
     public static int[] eatenCounts;
+    public static int playerCount;
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    Vector3 distanceToPlayer;
+    Vector3 distanceToPlayer = new Vector3(0, 40, -40);
     float nFocalLength;
 
     Dictionary<int, float> apertureDic = new Dictionary<int, float>()
@@ -21,10 +21,11 @@ public class CameraController : MonoBehaviour
 
     public void OnStart(Vector3 playerPos)
     {
-        distanceToPlayer = transform.position - playerPos;
+        //distanceToPlayer = transform.position - playerPos;
 
         nFocalLength = focalLength(Camera.main.fieldOfView, 20);
         //transform.position = playerPos + distanceToPlayer.normalized * nFocalLength;
+        transform.position = playerPos + distanceToPlayer;
     }
 
 

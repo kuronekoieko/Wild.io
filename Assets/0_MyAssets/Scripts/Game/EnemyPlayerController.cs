@@ -8,7 +8,11 @@ public class EnemyPlayerController : BasePlayerController
     {
         base.walkVec = Vector3.forward;
         base.OnStart();
-        base.playerIndex = 1;
+    }
+
+    public void SetParam(int playerIndex)
+    {
+        base.playerIndex = playerIndex;
     }
 
 

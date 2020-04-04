@@ -7,7 +7,7 @@ public class FeedController : BaseCharactorController
 
     public override void OnStart()
     {
-
+        base.size = -1;
     }
 
 

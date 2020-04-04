@@ -36,7 +36,7 @@ public class BasePlayerController : BaseCharactorController
         var colCharactor = col.gameObject.GetComponent<BaseCharactorController>();
         if (colCharactor == null) { return; }
         //おなじだと両方消えるので
-        if (colCharactor.size > base.size) { return; }
+        if (colCharactor.size >= base.size) { return; }
 
         Variables.eatenCounts[playerIndex]++;
         colCharactor.Killed();
