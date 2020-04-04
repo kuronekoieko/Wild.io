@@ -21,7 +21,7 @@ public class FeedManager : MonoBehaviour
 
     void FeedGenerator()
     {
-        feedControllers = new FeedController[500];
+        feedControllers = new FeedController[100];
         for (int i = 0; i < feedControllers.Length; i++)
         {
             Vector3 pos = GetRandomPos();

@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] CameraController _cameraController;
     [SerializeField] PlayerController _playerController;
     [SerializeField] FeedManager _feedManager;
+    [SerializeField] EnemyManager _enemyManager;
 
     void Awake()
     {
-        Variables.eatenCounts = new int[1];
+        Variables.eatenCounts = new int[2];
     }
 
     void Start()
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         _cameraController.OnStart(_playerController.transform.position);
         _playerController.OnStart();
         _feedManager.OnStart();
+        _enemyManager.OnStart();
         Variables.timer = Values.TIME_LIMIT;
     }
 
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
                 _cameraController.FollowTarget(_playerController.transform.position);
                 _playerController.OnUpdate();
                 _feedManager.OnUpdate();
+                _enemyManager.OnUpdate();
                 Variables.timer -= Time.deltaTime;
                 if (Variables.timer < 0)
                 {

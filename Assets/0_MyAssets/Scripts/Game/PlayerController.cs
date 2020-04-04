@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerController : BasePlayerController
 {
     [SerializeField] Animator animator;
-    Vector3 warkVec, mouseDownPos;
-    float walkSpeed = 500f;
-    Rigidbody rb;
+    Vector3 mouseDownPos;
+
+
     public override void OnStart()
     {
         base.OnStart();
-        rb = GetComponent<Rigidbody>();
+        base.playerIndex = 0;
     }
 
     public override void OnUpdate()
@@ -31,15 +31,14 @@ public class PlayerController : BasePlayerController
             SetWalkVec();
         }
 
-        float degree = Vector2ToDegree(new Vector2(warkVec.z, warkVec.x));
-        transform.eulerAngles = new Vector3(0, degree, 0);
 
-        rb.velocity = warkVec.normalized * walkSpeed * Time.deltaTime;
+
+        base.SetVelocityFromWalkVec();
     }
 
     public void Stop()
     {
-        rb.velocity = Vector3.zero;
+        base.rb.velocity = Vector3.zero;
     }
 
     void SetWalkVec()
@@ -49,14 +48,11 @@ public class PlayerController : BasePlayerController
 
         //タップで止まる対策
         if (mouseVec.sqrMagnitude < 1.0f) { return; }
-        warkVec.x = mouseVec.x;
-        warkVec.z = mouseVec.y;
+        walkVec.x = mouseVec.x;
+        walkVec.z = mouseVec.y;
 
     }
 
-    public static float Vector2ToDegree(Vector2 vec)
-    {
-        return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-    }
+
 
 }
