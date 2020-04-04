@@ -32,7 +32,6 @@ public class BasePlayerController : BaseCharactorController
 
     protected virtual void OnCollisionEnter(Collision col)
     {
-
         var colCharactor = col.gameObject.GetComponent<BaseCharactorController>();
         if (colCharactor == null) { return; }
         //おなじだと両方消えるので
@@ -44,8 +43,6 @@ public class BasePlayerController : BaseCharactorController
 
     void CheckSizeUp(int eatenCount)
     {
-        // if (Variables.screenState != ScreenState.Game) { return; }
-        Debug.Log(eatenCount + " " + name);
         int eatenCountToNextSize = Variables.playerSizes[base.size].eatenCountToNextSize;
         if (eatenCount < eatenCountToNextSize) { return; }
 
