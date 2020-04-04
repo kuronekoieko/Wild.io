@@ -13,6 +13,7 @@ public class EnemyPlayerController : BasePlayerController
     public void SetParam(int playerIndex)
     {
         base.playerIndex = playerIndex;
+        name = "Enemy_" + base.playerIndex;
     }
 
 

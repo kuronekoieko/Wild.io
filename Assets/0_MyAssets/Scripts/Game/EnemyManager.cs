@@ -14,8 +14,8 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < enemyPlayerControllers.Length; i++)
         {
             enemyPlayerControllers[i] = Instantiate(enemyPlayerPrefab, GameManager.i.GetRandomPlayerPos(), Quaternion.identity, transform);
-            enemyPlayerControllers[i].OnStart();
             enemyPlayerControllers[i].SetParam(i + 1);
+            enemyPlayerControllers[i].OnStart();
         }
     }
 

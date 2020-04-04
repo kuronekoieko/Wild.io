@@ -44,8 +44,9 @@ public class BasePlayerController : BaseCharactorController
 
     void CheckSizeUp(int eatenCount)
     {
-        int eatenCountToNextSize = PlayerSizeSettingSO.i.datas[base.size].eatenCountToNextSize;
-
+        // if (Variables.screenState != ScreenState.Game) { return; }
+        Debug.Log(eatenCount + " " + name);
+        int eatenCountToNextSize = Variables.playerSizes[base.size].eatenCountToNextSize;
         if (eatenCount < eatenCountToNextSize) { return; }
 
         size++;
