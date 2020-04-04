@@ -5,12 +5,12 @@ using UniRx;
 
 public class BasePlayerController : BaseCharactorController
 {
-    public int eatenCount;
+    public int playerIndex;
     public override void OnStart()
     {
         base.size = 0;
-        this.ObserveEveryValueChanged(count => this.eatenCount)
-            .Subscribe(count => CheckSizeUp())
+        this.ObserveEveryValueChanged(count => Variables.eatenCounts[playerIndex])
+            .Subscribe(count => CheckSizeUp(count))
             .AddTo(this.gameObject);
     }
 
@@ -24,11 +24,11 @@ public class BasePlayerController : BaseCharactorController
         var colCharactor = col.gameObject.GetComponent<BaseCharactorController>();
         if (colCharactor == null) { return; }
         if (colCharactor.size > base.size) { return; }
-        eatenCount++;
+        Variables.eatenCounts[playerIndex]++;
         colCharactor.Killed();
     }
 
-    void CheckSizeUp()
+    void CheckSizeUp(int eatenCount)
     {
         int eatenCountToNextSize = PlayerSizeSettingSO.i.datas[base.size].eatenCountToNextSize;
 

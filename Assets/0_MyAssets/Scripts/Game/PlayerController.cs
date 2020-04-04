@@ -37,6 +37,11 @@ public class PlayerController : BasePlayerController
         rb.velocity = warkVec.normalized * walkSpeed;
     }
 
+    public void Stop()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
     void SetWalkVec()
     {
 

@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController _playerController;
     [SerializeField] FeedManager _feedManager;
 
+    void Awake()
+    {
+        Variables.eatenCounts = new int[1];
+    }
+
     void Start()
     {
         _cameraController.OnStart(_playerController.transform.position);
@@ -19,13 +24,25 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        _cameraController.FollowTarget(_playerController.transform.position);
-        _playerController.OnUpdate();
-        _feedManager.OnUpdate();
-        Variables.timer -= Time.deltaTime;
-        if (Variables.timer < 0)
+        switch (Variables.screenState)
         {
-            Variables.screenState = ScreenState.Result;
+            case ScreenState.Start:
+                break;
+            case ScreenState.Game:
+                _cameraController.FollowTarget(_playerController.transform.position);
+                _playerController.OnUpdate();
+                _feedManager.OnUpdate();
+                Variables.timer -= Time.deltaTime;
+                if (Variables.timer < 0)
+                {
+                    Variables.screenState = ScreenState.Result;
+                }
+                break;
+            case ScreenState.Result:
+                _playerController.Stop();
+                break;
+            default:
+                break;
         }
     }
 }

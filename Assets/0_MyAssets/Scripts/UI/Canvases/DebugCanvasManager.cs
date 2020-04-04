@@ -11,6 +11,7 @@ public class DebugCanvasManager : BaseCanvasManager
     [SerializeField] Image debugPanel;
     [SerializeField] Button applyButton;
     [SerializeField] Button cancelButton;
+    [SerializeField] Button resultButton;
 
     public override void OnStart()
     {
@@ -20,6 +21,7 @@ public class DebugCanvasManager : BaseCanvasManager
         hideButton.onClick.AddListener(OnClickHideButton);
         applyButton.onClick.AddListener(OnClickApplyButton);
         cancelButton.onClick.AddListener(OnClickCancelButton);
+        resultButton.onClick.AddListener(() => { Variables.screenState = ScreenState.Result; });
     }
 
     void OnClickOpenButton()

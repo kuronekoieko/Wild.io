@@ -12,7 +12,7 @@ using UniRx;
 /// </summary>
 public class GameCanvasManager : BaseCanvasManager
 {
-    [SerializeField] Text stageNumText;
+    [SerializeField] Text timerText;
 
     public readonly ScreenState thisScreen = ScreenState.Game;
 
@@ -20,9 +20,8 @@ public class GameCanvasManager : BaseCanvasManager
     {
 
         base.SetScreenAction(thisScreen: thisScreen);
-
-        this.ObserveEveryValueChanged(currentStageIndex => Variables.currentStageIndex)
-            .Subscribe(currentStageIndex => { ShowStageNumText(); })
+        this.ObserveEveryValueChanged(timer => Variables.timer)
+            .Subscribe(_ => { SetTimeCountText(); })
             .AddTo(this.gameObject);
 
         gameObject.SetActive(true);
@@ -45,8 +44,12 @@ public class GameCanvasManager : BaseCanvasManager
         // gameObject.SetActive(false);
     }
 
-    void ShowStageNumText()
+    void SetTimeCountText()
     {
-        stageNumText.text = "Stage " + (Variables.currentStageIndex + 1).ToString("000");
+        int sec = Mathf.CeilToInt(Variables.timer);
+        float mSec = (Variables.timer - (sec - 1)) * 60f;
+        if (Variables.timer == Values.TIME_LIMIT) { mSec = 0; }
+        timerText.text = sec + "." + mSec.ToString("00");
     }
+
 }
