@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 3D空間の処理の管理
-/// </summary>
+
 public class GameManager : MonoBehaviour
 {
-    public void OnStart()
-    {
+    [SerializeField] CameraController _cameraController;
+    [SerializeField] PlayerController _playerController;
 
+    void Start()
+    {
+        _cameraController.OnStart(_playerController.transform.position);
+        _playerController.OnStart();
     }
 
-    public void OnInitialize()
+    void Update()
     {
-
-    }
-
-    public void OnUpdate()
-    {
-
+        _cameraController.FollowTarget(_playerController.transform.position);
+        _playerController.OnUpdate();
     }
 }

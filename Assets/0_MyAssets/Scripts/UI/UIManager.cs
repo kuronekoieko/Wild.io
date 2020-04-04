@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] RectTransform canvasesPatent;
     BaseCanvasManager[] canvases;
-    public void OnStart()
+    void Start()
     {
         canvases = new BaseCanvasManager[canvasesPatent.childCount];
         for (int i = 0; i < canvases.Length; i++)
@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OnUpdate(ScreenState currentScreen)
+    void OnUpdate(ScreenState currentScreen)
     {
         for (int i = 0; i < canvases.Length; i++)
         {
