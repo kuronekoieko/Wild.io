@@ -28,7 +28,10 @@ public class BasePlayerController : BaseCharactorController
     {
         float degree = Vector2ToDegree(new Vector2(walkVec.z, walkVec.x));
         transform.eulerAngles = new Vector3(0, degree, 0);
-        rb.velocity = walkVec.normalized * walkSpeed * Time.deltaTime;
+        Vector3 vel = walkVec.normalized * walkSpeed * Time.deltaTime;
+        //落下しなくなるため、上に飛ばないようにする
+        if (rb.velocity.y < 0) vel.y = rb.velocity.y;
+        rb.velocity = vel;
     }
 
     protected virtual void OnCollisionEnter(Collision col)
