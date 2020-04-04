@@ -6,7 +6,7 @@ public class PlayerController : BasePlayerController
 {
     [SerializeField] Animator animator;
     Vector3 warkVec, mouseDownPos;
-    float walkSpeed = 10f;
+    float walkSpeed = 500f;
     Rigidbody rb;
     public override void OnStart()
     {
@@ -34,7 +34,7 @@ public class PlayerController : BasePlayerController
         float degree = Vector2ToDegree(new Vector2(warkVec.z, warkVec.x));
         transform.eulerAngles = new Vector3(0, degree, 0);
 
-        rb.velocity = warkVec.normalized * walkSpeed;
+        rb.velocity = warkVec.normalized * walkSpeed * Time.deltaTime;
     }
 
     public void Stop()
