@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         _playerController.OnStart();
         _playerController.transform.position = GetRandomPlayerPos();
-        _cameraController.OnStart(_playerController.transform.position);
+        _cameraController.OnStart(_playerController);
         _feedManager.OnStart();
         _enemyManager.OnStart();
         Variables.timer = Values.TIME_LIMIT;

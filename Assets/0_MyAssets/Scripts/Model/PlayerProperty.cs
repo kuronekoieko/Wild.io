@@ -6,4 +6,5 @@ public class PlayerProperty
 {
     public int eatenCount;
     public string name;
+    
 }
