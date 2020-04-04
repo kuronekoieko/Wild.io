@@ -16,6 +16,7 @@ public class BasePlayerController : BaseCharactorController
             .Subscribe(count => CheckSizeUp(count))
             .AddTo(this.gameObject);
         rb = GetComponent<Rigidbody>();
+        transform.localScale = Vector3.one;
     }
 
     public override void OnUpdate()
@@ -47,7 +48,7 @@ public class BasePlayerController : BaseCharactorController
         if (eatenCount < eatenCountToNextSize) { return; }
 
         size++;
-        transform.localScale *= 2;
+        transform.localScale += Vector3.one;
     }
 
     public static float Vector2ToDegree(Vector2 vec)
