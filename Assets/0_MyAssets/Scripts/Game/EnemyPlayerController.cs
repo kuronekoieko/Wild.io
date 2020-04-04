@@ -25,6 +25,7 @@ public class EnemyPlayerController : BasePlayerController
     protected override void OnCollisionEnter(Collision col)
     {
         base.OnCollisionEnter(col);
+        if (col.transform.CompareTag("Ground")) { return; }
         Vector3 normal = col.contacts[0].normal;
         normal.y = 0;
         Vector3 reflectVec = Vector3.Reflect(base.walkVec, normal);
