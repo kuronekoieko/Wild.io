@@ -49,6 +49,7 @@ public class BasePlayerController : BaseCharactorController
 
         size++;
         transform.localScale += Vector3.one;
+        walkSpeed += 100;
     }
 
     public static float Vector2ToDegree(Vector2 vec)
