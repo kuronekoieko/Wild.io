@@ -7,7 +7,7 @@ public class BasePlayerController : BaseCharactorController
 {
     protected int playerIndex;
     protected Rigidbody rb;
-    float walkSpeed = 500f;
+    float walkSpeed = 600f;
     protected Vector3 walkVec;
     public override void OnStart()
     {
