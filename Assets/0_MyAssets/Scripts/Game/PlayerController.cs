@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System.Linq;
+using DG.Tweening;
 public class PlayerController : BaseCharactorController
 {
     public enum PlayerType
@@ -13,6 +14,8 @@ public class PlayerController : BaseCharactorController
     [SerializeField] Animator animator;
     [SerializeField] TextMesh infoText;
     [SerializeField] ParticleSystem sizeUpPS;
+    [SerializeField] TextMesh sizeUpText;
+
     int playerIndex;
     Rigidbody rb;
     float walkSpeed = 30f;
@@ -43,6 +46,7 @@ public class PlayerController : BaseCharactorController
                 break;
         }
         infoText.transform.LookAt(Camera.main.transform.position);
+        sizeUpText.gameObject.SetActive(false);
     }
 
     public void SetParam(int playerIndex)
@@ -75,6 +79,7 @@ public class PlayerController : BaseCharactorController
         }
 
         infoText.transform.LookAt(Camera.main.transform.position);
+        sizeUpText.transform.LookAt(Camera.main.transform.position);
     }
 
 
@@ -167,6 +172,22 @@ public class PlayerController : BaseCharactorController
         transform.localScale += Vector3.one;
         walkSpeed += 10;
         sizeUpPS.Play();
+        sizeUpTextAnim();
+    }
+
+    void sizeUpTextAnim()
+    {
+        sizeUpText.gameObject.SetActive(true);
+        sizeUpText.transform.localScale = Vector3.zero;
+        Color c = sizeUpText.color;
+        Sequence sequence = DOTween.Sequence()
+        .Append(sizeUpText.transform.DOScale(new Vector3(-1, 1, 1), 1).SetEase(Ease.OutElastic))
+        .Append(DOTween.ToAlpha(() => sizeUpText.color, color => sizeUpText.color = color, 0f, 1f))
+        .OnComplete(() =>
+        {
+            sizeUpText.gameObject.SetActive(false);
+            sizeUpText.color = c;
+        });
     }
 
     public static float Vector2ToDegree(Vector2 vec)
