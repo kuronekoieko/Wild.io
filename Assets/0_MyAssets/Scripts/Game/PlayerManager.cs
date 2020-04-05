@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class EnemyManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     [SerializeField] PlayerController playerPrefab;
     [SerializeField] Transform playerPossitionsParent;
-    public PlayerController[] PlayerControllers { get; set; }
+    public PlayerController[] playerControllers { get; set; }
     Transform[] playerPoints;
 
     void Awake()
@@ -29,10 +29,10 @@ public class EnemyManager : MonoBehaviour
 
     public void OnStart()
     {
-        PlayerControllers = new PlayerController[Variables.playerCount];
-        for (int i = 0; i < PlayerControllers.Length; i++)
+        playerControllers = new PlayerController[Variables.playerCount];
+        for (int i = 0; i < playerControllers.Length; i++)
         {
-            PlayerControllers[i] = Instantiate(
+            playerControllers[i] = Instantiate(
                 playerPrefab,
                 GetRandomPlayerPos(),
                 Quaternion.identity,
@@ -40,24 +40,24 @@ public class EnemyManager : MonoBehaviour
 
 
 
-            PlayerControllers[i].SetParam(playerIndex: i);
-            PlayerControllers[i].OnStart();
+            playerControllers[i].SetParam(playerIndex: i);
+            playerControllers[i].OnStart();
         }
     }
 
     public void Stop()
     {
-        for (int i = 0; i < PlayerControllers.Length; i++)
+        for (int i = 0; i < playerControllers.Length; i++)
         {
-            PlayerControllers[i].Stop();
+            playerControllers[i].Stop();
         }
     }
 
     public void OnUpdate()
     {
-        for (int i = 0; i < PlayerControllers.Length; i++)
+        for (int i = 0; i < playerControllers.Length; i++)
         {
-            PlayerControllers[i].OnUpdate();
+            playerControllers[i].OnUpdate();
         }
     }
 

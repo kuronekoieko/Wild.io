@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] CameraController _cameraController;
     [SerializeField] FeedManager _feedManager;
-    [SerializeField] EnemyManager _enemyManager;
+    [SerializeField] PlayerManager _playerManager;
 
     public static GameManager i;
     public FeedManager feedManager { get { return _feedManager; } }
-    public EnemyManager enemyManager { get { return _enemyManager; } }
+    public PlayerManager playerManager { get { return _playerManager; } }
 
 
     void Awake()
@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
 
         _feedManager.OnStart();
-        _enemyManager.OnStart();
-        _cameraController.OnStart(_enemyManager.PlayerControllers[0]);
+        _playerManager.OnStart();
+        _cameraController.OnStart(_playerManager.playerControllers[0]);
         Variables.timer = Values.TIME_LIMIT;
     }
 
@@ -36,9 +36,9 @@ public class GameManager : MonoBehaviour
             case ScreenState.Start:
                 break;
             case ScreenState.Game:
-                _cameraController.FollowTarget(_enemyManager.PlayerControllers[0].transform.position);
+                _cameraController.FollowTarget(_playerManager.playerControllers[0].transform.position);
                 _feedManager.OnUpdate();
-                _enemyManager.OnUpdate();
+                _playerManager.OnUpdate();
                 Variables.timer -= Time.deltaTime;
                 if (Variables.timer < 0)
                 {
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case ScreenState.Result:
-                _enemyManager.Stop();
+                _playerManager.Stop();
                 break;
             default:
                 break;
