@@ -11,12 +11,11 @@ public class PlayerController : BaseCharactorController
         Enemy,
     }
     [SerializeField] Animator animator;
-    protected int playerIndex;
-    protected Rigidbody rb;
+    int playerIndex;
+    Rigidbody rb;
     float walkSpeed = 700f;
-    protected Vector3 walkVec;
+    Vector3 walkVec;
     int maxSize;
-    bool isStarted = true;
     PlayerType type;
     Vector3 mouseDownPos;
 
@@ -67,22 +66,8 @@ public class PlayerController : BaseCharactorController
         SetVelocityFromWalkVec();
     }
 
-    public void Stop()
-    {
-        rb.velocity = Vector3.zero;
-    }
 
-    protected void SetVelocityFromWalkVec()
-    {
-        float degree = Vector2ToDegree(new Vector2(walkVec.z, walkVec.x));
-        transform.eulerAngles = new Vector3(0, degree, 0);
-        Vector3 vel = walkVec.normalized * walkSpeed * Time.deltaTime;
-        //落下しなくなるため、上に飛ばないようにする
-        if (rb.velocity.y < 0) vel.y = rb.velocity.y;
-        rb.velocity = vel;
-    }
-
-    protected virtual void OnCollisionEnter(Collision col)
+    void OnCollisionEnter(Collision col)
     {
 
         switch (type)
@@ -97,6 +82,22 @@ public class PlayerController : BaseCharactorController
 
         OnCollisionCharactor(col);
     }
+
+    public void Stop()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
+    void SetVelocityFromWalkVec()
+    {
+        float degree = Vector2ToDegree(new Vector2(walkVec.z, walkVec.x));
+        transform.eulerAngles = new Vector3(0, degree, 0);
+        Vector3 vel = walkVec.normalized * walkSpeed * Time.deltaTime;
+        //落下しなくなるため、上に飛ばないようにする
+        if (rb.velocity.y < 0) vel.y = rb.velocity.y;
+        rb.velocity = vel;
+    }
+
 
     void OnCollisionWall(Collision col)
     {
