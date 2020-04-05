@@ -14,6 +14,7 @@ public class GameCanvasManager : BaseCanvasManager
 {
     [SerializeField] Text timerText;
     [SerializeField] Text eatenCountText;
+    [SerializeField] RectTransform tutrials;
     public readonly ScreenState thisScreen = ScreenState.Game;
 
     public override void OnStart()
@@ -29,16 +30,21 @@ public class GameCanvasManager : BaseCanvasManager
             .AddTo(this.gameObject);
 
         gameObject.SetActive(true);
-
+        tutrials.gameObject.SetActive(false);
     }
 
     public override void OnUpdate()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            tutrials.gameObject.SetActive(false);
+        }
     }
 
     protected override void OnOpen()
     {
         gameObject.SetActive(true);
+        tutrials.gameObject.SetActive(true);
     }
 
     protected override void OnClose()
