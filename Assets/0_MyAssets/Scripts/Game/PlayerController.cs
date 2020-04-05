@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerController : BasePlayerController
 {
-    [SerializeField] Animator animator;
-    Vector3 mouseDownPos;
 
+    Vector3 mouseDownPos;
 
     public override void OnStart()
     {
@@ -16,6 +15,7 @@ public class PlayerController : BasePlayerController
 
     public override void OnUpdate()
     {
+        base.OnUpdate();
         Controller();
     }
 

@@ -5,11 +5,13 @@ using UniRx;
 using System.Linq;
 public class BasePlayerController : BaseCharactorController
 {
+    [SerializeField] Animator animator;
     protected int playerIndex;
     protected Rigidbody rb;
     float walkSpeed = 700f;
     protected Vector3 walkVec;
     int maxSize;
+    bool isStarted = true;
 
     public override void OnStart()
     {
@@ -24,7 +26,10 @@ public class BasePlayerController : BaseCharactorController
 
     public override void OnUpdate()
     {
-
+        if (rb.velocity.sqrMagnitude > 0)
+        {
+            animator.SetTrigger("Run");
+        }
     }
 
     protected void SetVelocityFromWalkVec()
@@ -46,6 +51,7 @@ public class BasePlayerController : BaseCharactorController
 
         Variables.playerProperties[playerIndex].eatenCount++;
         colCharactor.Killed();
+        animator.SetTrigger("Attack");
     }
 
     void CheckSizeUp(int eatenCount)

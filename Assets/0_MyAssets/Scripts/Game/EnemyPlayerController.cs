@@ -19,6 +19,7 @@ public class EnemyPlayerController : BasePlayerController
 
     public override void OnUpdate()
     {
+        base.OnUpdate();
         base.SetVelocityFromWalkVec();
     }
 
