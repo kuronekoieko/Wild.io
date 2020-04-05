@@ -1,22 +1,122 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerController : BasePlayerController
+using UniRx;
+using System.Linq;
+public class PlayerController : BaseCharactorController
 {
-
+    public enum PlayerType
+    {
+        Player,
+        Enemy,
+    }
+    [SerializeField] Animator animator;
+    protected int playerIndex;
+    protected Rigidbody rb;
+    float walkSpeed = 700f;
+    protected Vector3 walkVec;
+    int maxSize;
+    bool isStarted = true;
+    PlayerType type;
     Vector3 mouseDownPos;
 
     public override void OnStart()
     {
-        base.OnStart();
-        base.playerIndex = 0;
+        base.size = 0;
+        this.ObserveEveryValueChanged(count => Variables.playerProperties[playerIndex].eatenCount)
+            .Subscribe(count => CheckSizeUp(count))
+            .AddTo(this.gameObject);
+        rb = GetComponent<Rigidbody>();
+        transform.localScale = Vector3.one;
+        maxSize = Variables.playerSizes.Last().size;
+
+        type = (playerIndex == 0) ? PlayerType.Player : PlayerType.Enemy;
+
+        switch (type)
+        {
+            case PlayerType.Player:
+                break;
+            case PlayerType.Enemy:
+                walkVec = Vector3.forward;
+                break;
+        }
+    }
+
+    public void SetParam(int playerIndex)
+    {
+        this.playerIndex = playerIndex;
+        name = "Player_" + playerIndex;
     }
 
     public override void OnUpdate()
     {
-        base.OnUpdate();
-        Controller();
+        if (rb.velocity.sqrMagnitude > 0)
+        {
+            animator.SetTrigger("Run");
+        }
+
+        switch (type)
+        {
+            case PlayerType.Player:
+                Controller();
+                break;
+            case PlayerType.Enemy:
+                break;
+        }
+
+        SetVelocityFromWalkVec();
+    }
+
+    public void Stop()
+    {
+        rb.velocity = Vector3.zero;
+    }
+
+    protected void SetVelocityFromWalkVec()
+    {
+        float degree = Vector2ToDegree(new Vector2(walkVec.z, walkVec.x));
+        transform.eulerAngles = new Vector3(0, degree, 0);
+        Vector3 vel = walkVec.normalized * walkSpeed * Time.deltaTime;
+        //落下しなくなるため、上に飛ばないようにする
+        if (rb.velocity.y < 0) vel.y = rb.velocity.y;
+        rb.velocity = vel;
+    }
+
+    protected virtual void OnCollisionEnter(Collision col)
+    {
+
+        switch (type)
+        {
+            case PlayerType.Player:
+
+                break;
+            case PlayerType.Enemy:
+                OnCollisionWall(col);
+                break;
+        }
+
+        OnCollisionCharactor(col);
+    }
+
+    void OnCollisionWall(Collision col)
+    {
+        if (col.transform.CompareTag("Ground")) { return; }
+        Vector3 normal = col.contacts[0].normal;
+        normal.y = 0;
+        Vector3 reflectVec = Vector3.Reflect(walkVec, normal);
+        walkVec = reflectVec;
+    }
+
+    void OnCollisionCharactor(Collision col)
+    {
+        var colCharactor = col.gameObject.GetComponent<BaseCharactorController>();
+        if (colCharactor == null) { return; }
+        //おなじだと両方消えるので
+        if (colCharactor.size >= base.size) { return; }
+
+        Variables.playerProperties[playerIndex].eatenCount++;
+        colCharactor.Killed();
+        animator.SetTrigger("Attack");
     }
 
     void Controller()
@@ -30,15 +130,6 @@ public class PlayerController : BasePlayerController
         {
             SetWalkVec();
         }
-
-
-
-        base.SetVelocityFromWalkVec();
-    }
-
-    public void Stop()
-    {
-        base.rb.velocity = Vector3.zero;
     }
 
     void SetWalkVec()
@@ -53,6 +144,19 @@ public class PlayerController : BasePlayerController
 
     }
 
+    void CheckSizeUp(int eatenCount)
+    {
+        if (base.size > maxSize) { return; }
+        int eatenCountToNextSize = Variables.playerSizes[base.size].eatenCountToNextSize;
+        if (eatenCount < eatenCountToNextSize) { return; }
 
+        size++;
+        transform.localScale += Vector3.one;
+        walkSpeed += 100;
+    }
 
+    public static float Vector2ToDegree(Vector2 vec)
+    {
+        return Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+    }
 }

@@ -6,53 +6,28 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] CameraController _cameraController;
-    [SerializeField] PlayerController _playerController;
     [SerializeField] FeedManager _feedManager;
     [SerializeField] EnemyManager _enemyManager;
-    [SerializeField] Transform playerPossitionsParent;
-    Transform[] playerPoints;
+
     public static GameManager i;
     public FeedManager feedManager { get { return _feedManager; } }
-    public PlayerController playerController { get { return _playerController; } }
+    public EnemyManager enemyManager { get { return _enemyManager; } }
 
 
     void Awake()
     {
-        Variables.playerCount = playerPossitionsParent.childCount;
-        Variables.playerProperties = new PlayerProperty[Variables.playerCount];
-        for (int i = 0; i < Variables.playerProperties.Length; i++)
-        {
-            Variables.playerProperties[i] = new PlayerProperty();
-            Variables.playerProperties[i].name = "Player " + i;
-        }
-
-        playerPoints = new Transform[Variables.playerCount];
-        for (int i = 0; i < playerPoints.Length; i++)
-        {
-            playerPoints[i] = playerPossitionsParent.GetChild(i);
-        }
         i = this;
     }
-
     void Start()
     {
-        _playerController.OnStart();
-        _playerController.transform.position = GetRandomPlayerPos();
-        _cameraController.OnStart(_playerController);
+
         _feedManager.OnStart();
         _enemyManager.OnStart();
+        _cameraController.OnStart(_enemyManager.PlayerControllers[0]);
         Variables.timer = Values.TIME_LIMIT;
     }
 
-    public Vector3 GetRandomPlayerPos()
-    {
-        int randomInt = Random.Range(0, playerPoints.Length);
-        Vector3 pos = playerPoints[randomInt].position;
-        playerPoints[randomInt].gameObject.SetActive(false);
-        playerPoints = playerPoints.Where(p => p.gameObject.activeSelf).ToArray();
 
-        return pos;
-    }
 
     void Update()
     {
@@ -61,8 +36,7 @@ public class GameManager : MonoBehaviour
             case ScreenState.Start:
                 break;
             case ScreenState.Game:
-                _cameraController.FollowTarget(_playerController.transform.position);
-                _playerController.OnUpdate();
+                _cameraController.FollowTarget(_enemyManager.PlayerControllers[0].transform.position);
                 _feedManager.OnUpdate();
                 _enemyManager.OnUpdate();
                 Variables.timer -= Time.deltaTime;
@@ -72,7 +46,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case ScreenState.Result:
-                _playerController.Stop();
+                _enemyManager.Stop();
                 break;
             default:
                 break;

@@ -23,6 +23,8 @@ public class CameraController : MonoBehaviour
 
         maxSize = Variables.playerSizes.Last().size;
         transform.position = player.transform.position + vecFromPlayerToCamera.normalized * nFocalLength;
+        SCCameraCoverTransparent s = GetComponent<SCCameraCoverTransparent>();
+        s.subject = player.transform;
     }
 
     void CheckSizeUp(int size)

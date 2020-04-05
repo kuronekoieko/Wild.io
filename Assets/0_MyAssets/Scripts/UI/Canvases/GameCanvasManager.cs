@@ -37,7 +37,8 @@ public class GameCanvasManager : BaseCanvasManager
     public override void OnUpdate(ScreenState currentScreen)
     {
         if (currentScreen != thisScreen) { return; }
-        Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, GameManager.i.playerController.transform.position);
+        Vector3 wPos = GameManager.i.enemyManager.PlayerControllers[0].transform.position;
+        Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, wPos);
         pos.y += 1000;
         playerInfo.anchoredPosition = pos;
     }

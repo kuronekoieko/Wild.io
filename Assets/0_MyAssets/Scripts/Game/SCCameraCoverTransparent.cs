@@ -37,6 +37,7 @@ public class SCCameraCoverTransparent : MonoBehaviour
     /// </summary>
     [SerializeField]
     private Transform subject_;
+    public Transform subject { set { subject_ = value; } }
 
     /// <summary>
     /// 遮蔽物のレイヤー名のリスト。
