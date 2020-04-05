@@ -30,9 +30,9 @@ public class ResultCanvasManager : BaseCanvasManager
 
     }
 
-    public override void OnUpdate(ScreenState currentScreen)
+    public override void OnUpdate()
     {
-        if (currentScreen != thisScreen) { return; }
+      
 
     }
 

@@ -14,8 +14,6 @@ public class GameCanvasManager : BaseCanvasManager
 {
     [SerializeField] Text timerText;
     [SerializeField] Text eatenCountText;
-    [SerializeField] RectTransform playerInfo;
-
     public readonly ScreenState thisScreen = ScreenState.Game;
 
     public override void OnStart()
@@ -34,13 +32,8 @@ public class GameCanvasManager : BaseCanvasManager
 
     }
 
-    public override void OnUpdate(ScreenState currentScreen)
+    public override void OnUpdate()
     {
-        if (currentScreen != thisScreen) { return; }
-        Vector3 wPos = GameManager.i.playerManager.playerControllers[0].transform.position;
-        Vector3 pos = RectTransformUtility.WorldToScreenPoint(Camera.main, wPos);
-        pos.y += 1000;
-        playerInfo.anchoredPosition = pos;
     }
 
     protected override void OnOpen()

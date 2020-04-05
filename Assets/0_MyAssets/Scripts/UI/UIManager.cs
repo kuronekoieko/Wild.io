@@ -34,12 +34,12 @@ public class UIManager : MonoBehaviour
         Variables.screenState = ScreenState.Start;
     }
 
-    void OnUpdate(ScreenState currentScreen)
+    void Update()
     {
         for (int i = 0; i < canvases.Length; i++)
         {
             if (canvases[i] == null) { continue; }
-            canvases[i].OnUpdate(currentScreen);
+            canvases[i].OnUpdate();
         }
 
     }

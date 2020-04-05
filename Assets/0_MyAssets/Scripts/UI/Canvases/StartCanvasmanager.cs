@@ -17,10 +17,9 @@ public class StartCanvasmanager : BaseCanvasManager
         startButton.onClick.AddListener(OnClickStartButton);
     }
 
-    public override void OnUpdate(ScreenState currentScreen)
+    public override void OnUpdate()
     {
-        if (currentScreen != thisScreen) { return; }
-
+        
     }
 
     protected override void OnOpen()
