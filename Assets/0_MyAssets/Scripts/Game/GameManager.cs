@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     Transform[] playerPoints;
     public static GameManager i;
     public FeedManager feedManager { get { return _feedManager; } }
+    public PlayerController playerController { get { return _playerController; } }
+
 
     void Awake()
     {
