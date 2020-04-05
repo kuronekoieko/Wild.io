@@ -14,6 +14,7 @@ public class PlayerController : BaseCharactorController
     [SerializeField] TextMesh infoText;
     [SerializeField] ParticleSystem sizeUpPS;
     [SerializeField] TextMesh sizeUpText;
+    [SerializeField] SpriteRenderer infoBGSprite;
 
     int playerIndex;
     Rigidbody rb;
@@ -45,6 +46,7 @@ public class PlayerController : BaseCharactorController
                 break;
         }
         infoText.transform.LookAt(Camera.main.transform.position);
+        infoBGSprite.transform.LookAt(Camera.main.transform.position);
         sizeUpText.gameObject.SetActive(false);
     }
 
@@ -79,6 +81,7 @@ public class PlayerController : BaseCharactorController
 
         infoText.transform.LookAt(Camera.main.transform.position);
         sizeUpText.transform.LookAt(Camera.main.transform.position);
+        infoBGSprite.transform.LookAt(Camera.main.transform.position);
     }
 
 
