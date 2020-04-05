@@ -24,7 +24,7 @@ public class ResultCanvasManager : BaseCanvasManager
         for (int i = 0; i < playerResults.Length; i++)
         {
             playerResults[i] = Instantiate(playerResultPrefab, Vector3.zero, Quaternion.identity, transform);
-            playerResults[i].OnStart(posY);
+            playerResults[i].OnStart(posY, i);
             posY -= 150;
         }
 

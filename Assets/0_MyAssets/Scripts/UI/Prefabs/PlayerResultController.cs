@@ -8,11 +8,16 @@ public class PlayerResultController : MonoBehaviour
     [SerializeField] Text rankText;
     [SerializeField] Text nameText;
     [SerializeField] Text eatenCountText;
+    [SerializeField] Image rankBG;
+    [SerializeField] Image infoBG;
+    [SerializeField] Color myColor;
     string[] ordinals = new string[] { "st", "nd", "rd" };
 
     RectTransform rectTransform;
-    public void OnStart(float posY)
+    int playerIndex;
+    public void OnStart(float posY, int playerIndex)
     {
+        this.playerIndex = playerIndex;
         rectTransform = GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(0, posY);
     }
@@ -23,5 +28,10 @@ public class PlayerResultController : MonoBehaviour
         rankText.text = rank + ordinal;
         nameText.text = name;
         eatenCountText.text = "★ " + eatenCount;
+        if (playerIndex == 0)
+        {
+            rankBG.color = myColor;
+            infoBG.color = myColor;
+        }
     }
 }

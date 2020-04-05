@@ -282,6 +282,9 @@ MonoBehaviour:
   rankText: {fileID: 4141966308352793370}
   nameText: {fileID: 4698659288300325681}
   eatenCountText: {fileID: 1056122975123473173}
+  rankBG: {fileID: 2811768616571473664}
+  infoBG: {fileID: 6506896903551987001}
+  myColor: {r: 1, g: 0.5507697, b: 0.2028302, a: 1}
 --- !u!1 &5768175899103280984
 GameObject:
   m_ObjectHideFlags: 0
