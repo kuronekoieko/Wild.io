@@ -42,6 +42,7 @@ public class PlayerController : BaseCharactorController
                 animator.SetTrigger("Run");
                 break;
         }
+        infoText.transform.LookAt(Camera.main.transform.position);
     }
 
     public void SetParam(int playerIndex)
@@ -59,18 +60,20 @@ public class PlayerController : BaseCharactorController
     void FixedUpdate()
     {
 
-        if (Variables.screenState != ScreenState.Game) { return; }
-
-        switch (type)
+        if (Variables.screenState == ScreenState.Game)
         {
-            case PlayerType.Player:
-                Controller();
-                break;
-            case PlayerType.Enemy:
-                break;
+            switch (type)
+            {
+                case PlayerType.Player:
+                    Controller();
+                    break;
+                case PlayerType.Enemy:
+                    break;
+            }
+
+            SetVelocityFromWalkVec();
         }
 
-        SetVelocityFromWalkVec();
         infoText.transform.LookAt(Camera.main.transform.position);
     }
 
