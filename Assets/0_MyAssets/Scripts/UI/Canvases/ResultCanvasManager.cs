@@ -24,7 +24,7 @@ public class ResultCanvasManager : BaseCanvasManager
         for (int i = 0; i < playerResults.Length; i++)
         {
             playerResults[i] = Instantiate(playerResultPrefab, Vector3.zero, Quaternion.identity, transform);
-            playerResults[i].OnStart(posY, i);
+            playerResults[i].OnStart(posY);
             posY -= 150;
         }
 
@@ -47,7 +47,8 @@ public class ResultCanvasManager : BaseCanvasManager
             playerResults[i].ShowParam(
                 rank: i + 1,
                 name: ranking[i].name,
-                eatenCount: ranking[i].eatenCount
+                eatenCount: ranking[i].eatenCount,
+                playerIndex: ranking[i].playerIndex
                 );
         }
     }

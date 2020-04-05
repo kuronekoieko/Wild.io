@@ -14,15 +14,13 @@ public class PlayerResultController : MonoBehaviour
     string[] ordinals = new string[] { "st", "nd", "rd" };
 
     RectTransform rectTransform;
-    int playerIndex;
-    public void OnStart(float posY, int playerIndex)
+    public void OnStart(float posY)
     {
-        this.playerIndex = playerIndex;
         rectTransform = GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(0, posY);
     }
 
-    public void ShowParam(int rank, string name, int eatenCount)
+    public void ShowParam(int rank, string name, int eatenCount, int playerIndex)
     {
         string ordinal = (rank > ordinals.Length) ? "th" : ordinals[rank - 1];
         rankText.text = rank + ordinal;

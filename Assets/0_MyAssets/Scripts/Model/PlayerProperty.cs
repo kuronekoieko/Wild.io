@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerProperty
 {
+    public int playerIndex;
     public int eatenCount;
     public string name;
-    
+
 }

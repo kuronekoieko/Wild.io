@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
         {
             Variables.playerProperties[i] = new PlayerProperty();
             Variables.playerProperties[i].name = "Player " + i;
+            Variables.playerProperties[i].playerIndex = i;
         }
 
         playerPoints = new Transform[Variables.playerCount];
