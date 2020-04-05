@@ -13,10 +13,11 @@ public class FeedController : BaseCharactorController
 
     public override void OnUpdate()
     {
-        if (base.isDead)
+        if (base.charactorState == CharactorState.Dead)
         {
             transform.position = GameManager.i.feedManager.GetRandomPos();
-            base.isDead = false;
+            base.charactorState = CharactorState.Alive;
+            base.animator.gameObject.SetActive(true);
             gameObject.SetActive(true);
         }
     }

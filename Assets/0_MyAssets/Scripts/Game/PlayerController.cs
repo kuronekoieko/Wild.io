@@ -11,7 +11,6 @@ public class PlayerController : BaseCharactorController
         Player,
         Enemy,
     }
-    [SerializeField] Animator animator;
     [SerializeField] TextMesh infoText;
     [SerializeField] ParticleSystem sizeUpPS;
     [SerializeField] TextMesh sizeUpText;
@@ -42,7 +41,7 @@ public class PlayerController : BaseCharactorController
                 break;
             case PlayerType.Enemy:
                 walkVec = Vector3.forward;
-                animator.SetTrigger("Run");
+                base.animator.SetTrigger("Run");
                 break;
         }
         infoText.transform.LookAt(Camera.main.transform.position);
@@ -130,10 +129,11 @@ public class PlayerController : BaseCharactorController
         if (colCharactor == null) { return; }
         //おなじだと両方消えるので
         if (colCharactor.size >= base.size) { return; }
-
+        //死亡アニメーション中に処理させない
+        if (base.charactorState != CharactorState.Alive) { return; }
         Variables.playerProperties[playerIndex].eatenCount++;
         colCharactor.Killed();
-        animator.SetTrigger("Attack");
+        base.animator.SetTrigger("Attack");
     }
 
     void Controller()
@@ -141,7 +141,7 @@ public class PlayerController : BaseCharactorController
         if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
-            animator.SetTrigger("Run");
+            base.animator.SetTrigger("Run");
         }
 
         if (Input.GetMouseButton(0))
