@@ -11,9 +11,10 @@ public class PlayerController : BaseCharactorController
         Enemy,
     }
     [SerializeField] Animator animator;
+    [SerializeField] TextMesh infoText;
     int playerIndex;
     Rigidbody rb;
-    float walkSpeed = 700f;
+    float walkSpeed = 30f;
     Vector3 walkVec;
     int maxSize;
     PlayerType type;
@@ -37,6 +38,7 @@ public class PlayerController : BaseCharactorController
                 break;
             case PlayerType.Enemy:
                 walkVec = Vector3.forward;
+                animator.SetTrigger("Run");
                 break;
         }
     }
@@ -44,15 +46,19 @@ public class PlayerController : BaseCharactorController
     public void SetParam(int playerIndex)
     {
         this.playerIndex = playerIndex;
-        name = "Player_" + playerIndex;
+        name = "Player " + playerIndex;
+        infoText.text = name;
     }
 
     public override void OnUpdate()
     {
-        if (rb.velocity.sqrMagnitude > 0)
-        {
-            animator.SetTrigger("Run");
-        }
+
+    }
+
+    void FixedUpdate()
+    {
+
+
 
         switch (type)
         {
@@ -64,6 +70,7 @@ public class PlayerController : BaseCharactorController
         }
 
         SetVelocityFromWalkVec();
+        infoText.transform.LookAt(Camera.main.transform.position);
     }
 
 
@@ -92,7 +99,7 @@ public class PlayerController : BaseCharactorController
     {
         float degree = Vector2ToDegree(new Vector2(walkVec.z, walkVec.x));
         transform.eulerAngles = new Vector3(0, degree, 0);
-        Vector3 vel = walkVec.normalized * walkSpeed * Time.deltaTime;
+        Vector3 vel = walkVec.normalized * walkSpeed;
         //落下しなくなるため、上に飛ばないようにする
         if (rb.velocity.y < 0) vel.y = rb.velocity.y;
         rb.velocity = vel;
@@ -125,6 +132,7 @@ public class PlayerController : BaseCharactorController
         if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
+            animator.SetTrigger("Run");
         }
 
         if (Input.GetMouseButton(0))
@@ -153,7 +161,7 @@ public class PlayerController : BaseCharactorController
 
         size++;
         transform.localScale += Vector3.one;
-        walkSpeed += 100;
+        walkSpeed += 10;
     }
 
     public static float Vector2ToDegree(Vector2 vec)
