@@ -7,7 +7,7 @@ public class BasePlayerController : BaseCharactorController
 {
     protected int playerIndex;
     protected Rigidbody rb;
-    float walkSpeed = 600f;
+    float walkSpeed = 700f;
     protected Vector3 walkVec;
     int maxSize;
 

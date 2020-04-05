@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System.Linq;
+using DG.Tweening;
 
 /// <summary>
 /// Unityで解像度に合わせて画面のサイズを自動調整する
@@ -28,7 +29,8 @@ public class CameraController : MonoBehaviour
     {
         if (size > maxSize) { return; }
         float aperture = Variables.playerSizes[size].cameraAperture;
-        nFocalLength = focalLength(Camera.main.fieldOfView, aperture);
+        float f = focalLength(Camera.main.fieldOfView, aperture);
+        DOTween.To(() => nFocalLength, (x) => nFocalLength = x, f, 0.5f);
     }
 
 
