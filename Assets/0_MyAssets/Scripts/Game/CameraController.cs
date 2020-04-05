@@ -22,6 +22,9 @@ public class CameraController : MonoBehaviour
             .AddTo(this.gameObject);
 
         maxSize = Variables.playerSizes.Last().size;
+        float aperture = Variables.playerSizes.First().cameraAperture;
+        nFocalLength = focalLength(Camera.main.fieldOfView, aperture);
+
         transform.position = player.transform.position + vecFromPlayerToCamera.normalized * nFocalLength;
         SCCameraCoverTransparent s = GetComponent<SCCameraCoverTransparent>();
         s.subject = player.transform;
