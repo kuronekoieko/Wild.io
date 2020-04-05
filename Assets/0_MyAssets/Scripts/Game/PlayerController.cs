@@ -12,6 +12,7 @@ public class PlayerController : BaseCharactorController
     }
     [SerializeField] Animator animator;
     [SerializeField] TextMesh infoText;
+    [SerializeField] ParticleSystem sizeUpPS;
     int playerIndex;
     Rigidbody rb;
     float walkSpeed = 30f;
@@ -58,7 +59,7 @@ public class PlayerController : BaseCharactorController
     void FixedUpdate()
     {
 
-
+        if (Variables.screenState != ScreenState.Game) { return; }
 
         switch (type)
         {
@@ -162,6 +163,7 @@ public class PlayerController : BaseCharactorController
         size++;
         transform.localScale += Vector3.one;
         walkSpeed += 10;
+        sizeUpPS.Play();
     }
 
     public static float Vector2ToDegree(Vector2 vec)
