@@ -12,7 +12,7 @@ public class ResultCanvasManager : BaseCanvasManager
     public readonly ScreenState thisScreen = ScreenState.Result;
     PlayerResultController[] playerResults;
     PlayerProperty[] playerProperties;
-    float posY = 550f;
+    float posY = 400f;
     readonly int rankCount = 6;
 
     public override void OnStart()
