@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ObstacleController : BaseCharactorController
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        base.OnStart();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+
     }
 }

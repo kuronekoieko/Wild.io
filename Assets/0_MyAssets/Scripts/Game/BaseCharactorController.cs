@@ -12,15 +12,21 @@ public class BaseCharactorController : MonoBehaviour
         DeadAnim,
     }
     [SerializeField] ParticleSystem killedPS;
-    [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject hideObject;
     public int size;
     public CharactorState charactorState { set; get; }
+    Collider[] colliders;
 
     public void Killed()
     {
-        if (animator) animator.gameObject.SetActive(false);
+        hideObject.SetActive(false);
         charactorState = CharactorState.DeadAnim;
         if (killedPS) killedPS.Play();
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = false;
+        }
         DOVirtual.DelayedCall(1, () =>
         {
             gameObject.SetActive(false);
@@ -28,9 +34,21 @@ public class BaseCharactorController : MonoBehaviour
         });
     }
 
+    protected void OnAlive()
+    {
+        transform.position = GameManager.i.feedManager.GetRandomPos();
+        charactorState = CharactorState.Alive;
+        hideObject.SetActive(true);
+        gameObject.SetActive(true);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = true;
+        }
+    }
+
     public virtual void OnStart()
     {
-
+        colliders = GetComponents<Collider>();
     }
 
     public virtual void OnUpdate()

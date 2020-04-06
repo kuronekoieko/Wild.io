@@ -15,7 +15,7 @@ public class PlayerController : BaseCharactorController
     [SerializeField] ParticleSystem sizeUpPS;
     [SerializeField] TextMesh sizeUpText;
     [SerializeField] SpriteRenderer infoBGSprite;
-
+    [SerializeField] Animator animator;
     int playerIndex;
     Rigidbody rb;
     float walkSpeed = 30f;
@@ -42,12 +42,13 @@ public class PlayerController : BaseCharactorController
                 break;
             case PlayerType.Enemy:
                 walkVec = Vector3.forward;
-                base.animator.SetTrigger("Run");
+                animator.SetTrigger("Run");
                 break;
         }
         infoText.transform.LookAt(Camera.main.transform.position);
         infoBGSprite.transform.LookAt(Camera.main.transform.position);
         sizeUpText.gameObject.SetActive(false);
+        base.OnStart();
     }
 
     public void SetParam(int playerIndex)
@@ -142,7 +143,10 @@ public class PlayerController : BaseCharactorController
         if (base.charactorState != CharactorState.Alive) { return; }
         Variables.playerProperties[playerIndex].eatenCount++;
         colCharactor.Killed();
-        base.animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+        var charactorRB = colCharactor.GetComponent<Rigidbody>();
+        if (charactorRB == null) { return; }
+        charactorRB.isKinematic = true;
     }
 
     void Controller()
@@ -150,7 +154,7 @@ public class PlayerController : BaseCharactorController
         if (Input.GetMouseButtonDown(0))
         {
             mouseDownPos = Input.mousePosition;
-            base.animator.SetTrigger("Run");
+            animator.SetTrigger("Run");
         }
 
         if (Input.GetMouseButton(0))

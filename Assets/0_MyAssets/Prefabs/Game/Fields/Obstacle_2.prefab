@@ -29,11 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4396864713456018246}
-  - {fileID: 4402831806729521270}
-  - {fileID: 4398643035827379617}
-  - {fileID: 4396742927337400462}
-  - {fileID: 4398643036390359991}
+  - {fileID: 4180074946569878333}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,14 +59,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killedPS: {fileID: 0}
-  animator: {fileID: 0}
+  hideObject: {fileID: 7399055040374895866}
   size: 8
+--- !u!1 &7399055040374895866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180074946569878333}
+  m_Layer: 9
+  m_Name: HideObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180074946569878333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7399055040374895866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4396864713456018246}
+  - {fileID: 4402831806729521270}
+  - {fileID: 4398643035827379617}
+  - {fileID: 4396742927337400462}
+  - {fileID: 4398643036390359991}
+  m_Father: {fileID: 5403744163319980154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4398643035054665602
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5403744163319980154}
+    m_TransformParent: {fileID: 4180074946569878333}
     m_Modifications:
     - target: {fileID: 1039740709712086, guid: 96301016d813eb140a67772e2229e3d1, type: 3}
       propertyPath: m_Layer
@@ -118,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4818860893693940, guid: 96301016d813eb140a67772e2229e3d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6427876
+      value: -0.64278764
       objectReference: {fileID: 0}
     - target: {fileID: 4818860893693940, guid: 96301016d813eb140a67772e2229e3d1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -126,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4818860893693940, guid: 96301016d813eb140a67772e2229e3d1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.76604444
+      value: 0.7660445
       objectReference: {fileID: 0}
     - target: {fileID: 4818860893693940, guid: 96301016d813eb140a67772e2229e3d1, type: 3}
       propertyPath: m_RootOrder
@@ -177,7 +208,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5403744163319980154}
+    m_TransformParent: {fileID: 4180074946569878333}
     m_Modifications:
     - target: {fileID: 1577874592885416, guid: 60613fce6cccb334dad24da72cb319bc, type: 3}
       propertyPath: m_Layer
@@ -246,7 +277,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5403744163319980154}
+    m_TransformParent: {fileID: 4180074946569878333}
     m_Modifications:
     - target: {fileID: 1084476442997440, guid: 960449995c3f15049bd987cc9a1afeb7, type: 3}
       propertyPath: m_Layer
@@ -479,7 +510,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5403744163319980154}
+    m_TransformParent: {fileID: 4180074946569878333}
     m_Modifications:
     - target: {fileID: 100000, guid: a2378518d5ea3fa4fb2fd6c923c707a0, type: 3}
       propertyPath: m_Layer
@@ -598,7 +629,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5403744163319980154}
+    m_TransformParent: {fileID: 4180074946569878333}
     m_Modifications:
     - target: {fileID: 100000, guid: 2644ff571c91fc54b928a90673a1a0c3, type: 3}
       propertyPath: m_Layer

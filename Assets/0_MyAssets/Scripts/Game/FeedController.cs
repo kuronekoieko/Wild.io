@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class FeedController : BaseCharactorController
 {
-
+    Rigidbody rb;
     public override void OnStart()
     {
         base.size = -1;
+        base.OnStart();
+        rb = GetComponent<Rigidbody>();
     }
 
 
@@ -15,10 +17,8 @@ public class FeedController : BaseCharactorController
     {
         if (base.charactorState == CharactorState.Dead)
         {
-            transform.position = GameManager.i.feedManager.GetRandomPos();
-            base.charactorState = CharactorState.Alive;
-            base.animator.gameObject.SetActive(true);
-            gameObject.SetActive(true);
+            rb.isKinematic = false;
+            base.OnAlive();
         }
     }
 }

@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killedPS: {fileID: 0}
-  animator: {fileID: 0}
+  hideObject: {fileID: 4683363896909732929}
   size: 4
 --- !u!65 &5511237064804716633
 BoxCollider:
