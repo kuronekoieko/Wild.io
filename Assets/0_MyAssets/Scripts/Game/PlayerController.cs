@@ -99,6 +99,12 @@ public class PlayerController : BaseCharactorController
         }
 
         OnCollisionCharactor(col);
+
+        var obstacle = col.gameObject.GetComponent<ObstacleController>();
+        if (obstacle)
+        {
+            Debug.Log("aaaaaaaaaaaaaaaaa");
+        }
     }
 
     public void Stop()
