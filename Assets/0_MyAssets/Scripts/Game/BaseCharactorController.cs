@@ -13,12 +13,12 @@ public class BaseCharactorController : MonoBehaviour
     }
     [SerializeField] ParticleSystem killedPS;
     [SerializeField] protected Animator animator;
-    public int size { set; get; }
+    public int size;
     public CharactorState charactorState { set; get; }
 
     public void Killed()
     {
-        animator.gameObject.SetActive(false);
+        if (animator) animator.gameObject.SetActive(false);
         charactorState = CharactorState.DeadAnim;
         if (killedPS) killedPS.Play();
         DOVirtual.DelayedCall(1, () =>
