@@ -12,12 +12,13 @@ public class PlayerResultController : MonoBehaviour
     [SerializeField] Image infoBG;
     [SerializeField] Color myColor;
     string[] ordinals = new string[] { "st", "nd", "rd" };
-
     RectTransform rectTransform;
+    Color defaultColor;
     public void OnStart(float posY)
     {
         rectTransform = GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(0, posY);
+        defaultColor = rankBG.color;
     }
 
     public void ShowParam(int rank, string name, int eatenCount, int playerIndex)
@@ -30,6 +31,11 @@ public class PlayerResultController : MonoBehaviour
         {
             rankBG.color = myColor;
             infoBG.color = myColor;
+        }
+        else
+        {
+            rankBG.color = defaultColor;
+            infoBG.color = defaultColor;
         }
     }
 }
