@@ -108,7 +108,7 @@ public class PlayerController : BaseCharactorController
         base.OnUpdate();
     }
 
-    
+
 
 
     void OnCollisionEnter(Collision col)
@@ -125,7 +125,7 @@ public class PlayerController : BaseCharactorController
                     if (col.gameObject == closestCharactor.gameObject)
                     {
                         closestCharactor = null;
-                        Debug.Log("aaaaaaaaaaa");
+                        // Debug.Log("aaaaaaaaaaa");
                     }
                 }
 
@@ -172,7 +172,11 @@ public class PlayerController : BaseCharactorController
         if (colCharactor.size >= base.size) { return; }
         //死亡アニメーション中に処理させない
         if (base.charactorState != CharactorState.Alive) { return; }
-        Variables.playerProperties[playerIndex].eatenCount += colCharactor.eatenCount;
+
+
+        int rate = (playerIndex == 0) ? 1 : Random.Range(1, 3);
+
+        Variables.playerProperties[playerIndex].eatenCount += colCharactor.eatenCount * rate;
         colCharactor.Killed();
         animator.SetTrigger("Attack");
         var charactorRB = colCharactor.GetComponent<Rigidbody>();
@@ -217,10 +221,7 @@ public class PlayerController : BaseCharactorController
         walkSpeed += 10;
         sizeUpPS.Play();
         sizeUpTextAnim();
-        if (playerIndex == 0)
-        {
-            Debug.Log(size);
-        }
+        Debug.Log(name + " " + size);
     }
 
     void sizeUpTextAnim()
