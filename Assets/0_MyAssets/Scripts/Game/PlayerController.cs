@@ -142,7 +142,7 @@ public class PlayerController : BaseCharactorController
         if (colCharactor.size >= base.size) { return; }
         //死亡アニメーション中に処理させない
         if (base.charactorState != CharactorState.Alive) { return; }
-        Variables.playerProperties[playerIndex].eatenCount++;
+        Variables.playerProperties[playerIndex].eatenCount += colCharactor.eatenCount;
         colCharactor.Killed();
         animator.SetTrigger("Attack");
         var charactorRB = colCharactor.GetComponent<Rigidbody>();

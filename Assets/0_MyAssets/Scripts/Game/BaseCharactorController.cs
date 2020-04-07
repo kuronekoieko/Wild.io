@@ -18,12 +18,14 @@ public class BaseCharactorController : MonoBehaviour
     public int size;
     public CharactorState charactorState { set; get; }
     Collider[] colliders;
+    public int eatenCount { get { return size + 2; } }
 
     public virtual void OnStart()
     {
         colliders = GetComponents<Collider>();
         eatenCountText = Instantiate(eatenCountTextPrefab, transform.position, Quaternion.identity, transform);
         eatenCountText.gameObject.SetActive(false);
+        eatenCountText.transform.localScale = eatenCountText.transform.localScale * eatenCount * 0.7f;
     }
 
     public virtual void OnUpdate()
@@ -33,19 +35,21 @@ public class BaseCharactorController : MonoBehaviour
 
     public void Killed()
     {
+        float duration = 1.0f;
         hideObject.SetActive(false);
         charactorState = CharactorState.DeadAnim;
         if (killedPS) killedPS.Play();
 
+        eatenCountText.text = "+" + eatenCount;
         eatenCountText.gameObject.SetActive(true);
-        eatenCountText.transform.DOMoveY(10, 1).SetRelative();
+        eatenCountText.transform.DOMoveY(10, duration).SetRelative();
 
 
         for (int i = 0; i < colliders.Length; i++)
         {
             colliders[i].enabled = false;
         }
-        DOVirtual.DelayedCall(1, () =>
+        DOVirtual.DelayedCall(duration, () =>
         {
             gameObject.SetActive(false);
             charactorState = CharactorState.Dead;
