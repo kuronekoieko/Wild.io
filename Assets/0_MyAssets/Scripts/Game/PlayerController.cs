@@ -65,7 +65,7 @@ public class PlayerController : BaseCharactorController
     public void SetParam(int playerIndex)
     {
         this.playerIndex = playerIndex;
-        name = "Player " + playerIndex;
+        name = Variables.playerProperties[playerIndex].name;
         infoText.text = name;
     }
 
