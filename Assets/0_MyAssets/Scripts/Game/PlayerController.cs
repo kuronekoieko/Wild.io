@@ -187,6 +187,10 @@ public class PlayerController : BaseCharactorController
         walkSpeed += 10;
         sizeUpPS.Play();
         sizeUpTextAnim();
+        if (playerIndex == 0)
+        {
+            Debug.Log(size);
+        }
     }
 
     void sizeUpTextAnim()
