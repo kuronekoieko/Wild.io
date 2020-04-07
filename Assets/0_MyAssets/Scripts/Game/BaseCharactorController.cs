@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum CharactorState
+{
+    Alive,
+    Dead,
+    DeadAnim,
+}
+
 public class BaseCharactorController : MonoBehaviour
 {
-    public enum CharactorState
-    {
-        Alive,
-        Dead,
-        DeadAnim,
-    }
+
     [SerializeField] ParticleSystem killedPS;
     [SerializeField] protected GameObject hideObject;
     [SerializeField] TextMesh eatenCountTextPrefab;

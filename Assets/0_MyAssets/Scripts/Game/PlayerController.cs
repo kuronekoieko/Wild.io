@@ -4,6 +4,8 @@ using UnityEngine;
 using UniRx;
 using System.Linq;
 using DG.Tweening;
+using UnityEngine.AI;
+
 public class PlayerController : BaseCharactorController
 {
     public enum PlayerType
@@ -23,6 +25,8 @@ public class PlayerController : BaseCharactorController
     int maxSize;
     PlayerType type;
     Vector3 mouseDownPos;
+    NavMeshAgent agent;
+    BaseCharactorController closestCharactor;
 
     public override void OnStart()
     {
@@ -31,6 +35,7 @@ public class PlayerController : BaseCharactorController
             .Subscribe(count => CheckSizeUp(count))
             .AddTo(this.gameObject);
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
         transform.localScale = Vector3.one;
         maxSize = Variables.playerSizes.Last().size;
 
@@ -49,6 +54,12 @@ public class PlayerController : BaseCharactorController
         infoBGSprite.transform.LookAt(Camera.main.transform.position);
         sizeUpText.gameObject.SetActive(false);
         base.OnStart();
+
+        agent.stoppingDistance = 0;
+        agent.angularSpeed = 1000;
+        agent.acceleration = 100;
+        agent.speed = 50;
+        agent.enabled = (playerIndex != 0);
     }
 
     public void SetParam(int playerIndex)
@@ -72,28 +83,23 @@ public class PlayerController : BaseCharactorController
             {
                 case PlayerType.Player:
                     Controller();
+                    SetVelocityFromWalkVec();
                     break;
                 case PlayerType.Enemy:
-                    var closestCharactor = GameManager.i.GetClosestTarget(transform.position);
+
                     if (closestCharactor)
                     {
-                        if (closestCharactor.size < base.size)
-                        {
-                            walkVec = closestCharactor.transform.position - transform.position;
-                        }
-
-
-                        Debug.Log(walkVec);
+                        agent.SetDestination(closestCharactor.transform.position);
                     }
-
-                    if (walkVec.sqrMagnitude < 1)
+                    else
                     {
-                        // walkVec = transform.forward;
+                        //SetVelocityFromWalkVec();
+                        closestCharactor = GameManager.i.GetClosestTarget(transform.position, base.size);
                     }
                     break;
             }
 
-            SetVelocityFromWalkVec();
+
         }
 
         infoText.transform.LookAt(Camera.main.transform.position);
@@ -101,6 +107,8 @@ public class PlayerController : BaseCharactorController
         infoBGSprite.transform.LookAt(Camera.main.transform.position);
         base.OnUpdate();
     }
+
+    
 
 
     void OnCollisionEnter(Collision col)
@@ -112,17 +120,20 @@ public class PlayerController : BaseCharactorController
 
                 break;
             case PlayerType.Enemy:
+                if (closestCharactor)
+                {
+                    if (col.gameObject == closestCharactor.gameObject)
+                    {
+                        closestCharactor = null;
+                        Debug.Log("aaaaaaaaaaa");
+                    }
+                }
+
                 OnCollisionWall(col);
                 break;
         }
 
         OnCollisionCharactor(col);
-
-        var obstacle = col.gameObject.GetComponent<ObstacleController>();
-        if (obstacle)
-        {
-            //Debug.Log("aaaaaaaaaaaaaaaaa");
-        }
     }
 
     public void Stop()

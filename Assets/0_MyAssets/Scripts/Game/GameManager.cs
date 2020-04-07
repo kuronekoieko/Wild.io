@@ -60,12 +60,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public BaseCharactorController GetClosestTarget(Vector3 basePos)
+    public BaseCharactorController GetClosestTarget(Vector3 basePos, int size)
     {
         return charactorControllers
-            .Where(c => (c.transform.position - basePos).sqrMagnitude < 1000)
-            .OrderBy(c => (c.transform.position - basePos).sqrMagnitude)
+            //.Where(c => (c.transform.position - basePos).sqrMagnitude < 1000)
+            .OrderBy(c => (c.transform.position - basePos).magnitude)
             .Where(c => c.gameObject.activeSelf)
+            .Where(c => c.charactorState == CharactorState.Alive)
+            .Where(c => c.size < size)
             .FirstOrDefault();
 
     }
