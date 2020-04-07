@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager i;
     public FeedManager feedManager { get { return _feedManager; } }
     public PlayerManager playerManager { get { return _playerManager; } }
-
+    List<BaseCharactorController> charactorControllers;
 
     void Awake()
     {
@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
         _playerManager.OnStart();
         _cameraController.OnStart(_playerManager.playerControllers[0]);
         Variables.timer = Values.TIME_LIMIT;
+
+        charactorControllers = new List<BaseCharactorController>();
+        foreach (BaseCharactorController item in FindObjectsOfType<BaseCharactorController>())
+        {
+            charactorControllers.Add(item);
+        }
     }
 
 
@@ -51,5 +57,16 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+    public BaseCharactorController GetClosestTarget(Vector3 basePos)
+    {
+        return charactorControllers
+            .Where(c => (c.transform.position - basePos).sqrMagnitude < 1000)
+            .OrderBy(c => (c.transform.position - basePos).sqrMagnitude)
+            .Where(c => c.gameObject.activeSelf)
+            .FirstOrDefault();
+
     }
 }

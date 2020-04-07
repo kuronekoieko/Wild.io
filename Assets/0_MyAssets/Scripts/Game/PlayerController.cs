@@ -74,6 +74,22 @@ public class PlayerController : BaseCharactorController
                     Controller();
                     break;
                 case PlayerType.Enemy:
+                    var closestCharactor = GameManager.i.GetClosestTarget(transform.position);
+                    if (closestCharactor)
+                    {
+                        if (closestCharactor.size < base.size)
+                        {
+                            walkVec = closestCharactor.transform.position - transform.position;
+                        }
+
+
+                        Debug.Log(walkVec);
+                    }
+
+                    if (walkVec.sqrMagnitude < 1)
+                    {
+                        // walkVec = transform.forward;
+                    }
                     break;
             }
 
@@ -128,10 +144,13 @@ public class PlayerController : BaseCharactorController
     void OnCollisionWall(Collision col)
     {
         if (col.transform.CompareTag("Ground")) { return; }
+
         Vector3 normal = col.contacts[0].normal;
         normal.y = 0;
         Vector3 reflectVec = Vector3.Reflect(walkVec, normal);
         walkVec = reflectVec;
+
+
     }
 
     void OnCollisionCharactor(Collision col)
