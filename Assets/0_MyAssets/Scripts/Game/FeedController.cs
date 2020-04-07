@@ -9,6 +9,7 @@ public class FeedController : BaseCharactorController
     float timer;
     Vector3 walkVec;
     float walkSpeed = 10f;
+    float timeLimit;
     public override void OnStart()
     {
         base.size = -1;
@@ -17,6 +18,7 @@ public class FeedController : BaseCharactorController
         int x = Random.Range(-10, 10);
         int z = Random.Range(-10, 10);
         walkVec = new Vector3(x, 0, z);
+        timeLimit = Random.Range(1, 6);
     }
 
 
@@ -30,9 +32,10 @@ public class FeedController : BaseCharactorController
         base.OnUpdate();
 
         timer += Time.deltaTime;
-        if (timer > 3)
+        if (timer > timeLimit)
         {
             timer = 0;
+            timeLimit = Random.Range(1, 6);
             int x = Random.Range(-10, 10);
             int z = Random.Range(-10, 10);
             walkVec = new Vector3(x, 0, z);
