@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FeedController : BaseCharactorController
 {
+    
     Rigidbody rb;
     public override void OnStart()
     {
@@ -20,5 +21,6 @@ public class FeedController : BaseCharactorController
             rb.isKinematic = false;
             base.OnAlive();
         }
+        base.OnUpdate();
     }
 }

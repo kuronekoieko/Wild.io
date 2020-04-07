@@ -13,6 +13,6 @@ public class ObstacleController : BaseCharactorController
 
     void Update()
     {
-
+        base.OnUpdate();
     }
 }

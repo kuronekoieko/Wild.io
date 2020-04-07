@@ -61,6 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killedPS: {fileID: 234945004747949481}
   hideObject: {fileID: 8506095465614637173}
+  eatenCountTextPrefab: {fileID: 3831832223212193232, guid: 9baa3d5f359664f65895b4f2c2273724,
+    type: 3}
   size: 9
 --- !u!1 &8506095465614637173
 GameObject:

@@ -83,6 +83,7 @@ public class PlayerController : BaseCharactorController
         infoText.transform.LookAt(Camera.main.transform.position);
         sizeUpText.transform.LookAt(Camera.main.transform.position);
         infoBGSprite.transform.LookAt(Camera.main.transform.position);
+        base.OnUpdate();
     }
 
 
@@ -104,7 +105,7 @@ public class PlayerController : BaseCharactorController
         var obstacle = col.gameObject.GetComponent<ObstacleController>();
         if (obstacle)
         {
-            Debug.Log("aaaaaaaaaaaaaaaaa");
+            //Debug.Log("aaaaaaaaaaaaaaaaa");
         }
     }
 
