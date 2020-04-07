@@ -71,7 +71,11 @@ public class PlayerController : BaseCharactorController
 
     public override void OnUpdate()
     {
-
+        if (base.charactorState == CharactorState.Dead && playerIndex == 0)
+        {
+            Variables.screenState = ScreenState.Result;
+            Variables.isKilled = true;
+        }
     }
 
     void FixedUpdate()

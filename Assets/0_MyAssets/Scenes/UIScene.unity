@@ -916,6 +916,7 @@ MonoBehaviour:
   nextButton: {fileID: 411365100}
   playerResultPrefab: {fileID: 189382537402524999, guid: f11ac165b4f054061a4227297f28e496,
     type: 3}
+  resultText: {fileID: 1411329296}
 --- !u!114 &1144613824
 MonoBehaviour:
   m_ObjectHideFlags: 0

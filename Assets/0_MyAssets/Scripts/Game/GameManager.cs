@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         {
             charactorControllers.Add(item);
         }
+        Variables.isKilled = false;
     }
 
 

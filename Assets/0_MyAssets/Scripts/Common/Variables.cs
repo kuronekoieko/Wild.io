@@ -16,4 +16,5 @@ public class Variables : MonoBehaviour
     public static PlayerProperty[] playerProperties;
     public static int playerCount;
     public static List<PlayerSize> playerSizes;
+    public static bool isKilled;
 }

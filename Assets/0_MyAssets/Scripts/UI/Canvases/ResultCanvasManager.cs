@@ -9,6 +9,7 @@ public class ResultCanvasManager : BaseCanvasManager
 {
     [SerializeField] Button nextButton;
     [SerializeField] PlayerResultController playerResultPrefab;
+    [SerializeField] Text resultText;
     public readonly ScreenState thisScreen = ScreenState.Result;
     PlayerResultController[] playerResults;
     PlayerProperty[] playerProperties;
@@ -38,6 +39,7 @@ public class ResultCanvasManager : BaseCanvasManager
 
     protected override void OnOpen()
     {
+        resultText.text = Variables.isKilled ? "KILLED..." : "TIME OUT!";
         gameObject.SetActive(true);
         PlayerProperty[] ranking = Variables.playerProperties
             .OrderByDescending(p => p.eatenCount)
