@@ -42,7 +42,7 @@ public class BaseCharactorController : MonoBehaviour
 
         eatenCountText.text = "+" + eatenCount;
         eatenCountText.gameObject.SetActive(true);
-        eatenCountText.transform.DOMoveY(10, duration).SetRelative();
+        eatenCountText.transform.DOMoveY(10 * eatenCount * 0.7f, duration).SetRelative();
 
 
         for (int i = 0; i < colliders.Length; i++)
