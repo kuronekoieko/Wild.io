@@ -38,7 +38,7 @@ public class BaseCharactorController : MonoBehaviour
     public void Killed()
     {
         float duration = 1.0f;
-        hideObject.SetActive(false);
+
         charactorState = CharactorState.DeadAnim;
         if (killedPS) killedPS.Play();
 
@@ -53,6 +53,7 @@ public class BaseCharactorController : MonoBehaviour
         }
         DOVirtual.DelayedCall(duration, () =>
         {
+            hideObject.SetActive(false);
             gameObject.SetActive(false);
             charactorState = CharactorState.Dead;
         });

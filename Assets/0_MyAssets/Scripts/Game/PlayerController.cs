@@ -71,10 +71,15 @@ public class PlayerController : BaseCharactorController
 
     public override void OnUpdate()
     {
+        if (base.charactorState == CharactorState.DeadAnim)
+        {
+            animator.SetTrigger("Dead");
+        }
         if (base.charactorState == CharactorState.Dead && playerIndex == 0)
         {
             Variables.screenState = ScreenState.Result;
             Variables.isKilled = true;
+
         }
     }
 
