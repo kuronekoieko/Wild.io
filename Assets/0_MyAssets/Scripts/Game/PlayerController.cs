@@ -18,6 +18,7 @@ public class PlayerController : BaseCharactorController
     [SerializeField] TextMesh sizeUpText;
     [SerializeField] SpriteRenderer infoBGSprite;
     [SerializeField] Animator animator;
+    [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
     int playerIndex;
     Rigidbody rb;
     float walkSpeed = 30f;
@@ -39,6 +40,7 @@ public class PlayerController : BaseCharactorController
         transform.localScale = Vector3.one;
         maxSize = Variables.playerSizes.Last().size;
 
+        skinnedMeshRenderer.material.color = PlayerSettingSO.i.playerSettings[playerIndex].color;
         type = (playerIndex == 0) ? PlayerType.Player : PlayerType.Enemy;
 
         switch (type)
@@ -71,7 +73,11 @@ public class PlayerController : BaseCharactorController
 
     public override void OnUpdate()
     {
-
+        if (playerIndex == 0 && base.charactorState == CharactorState.Dead)
+        {
+            Variables.screenState = ScreenState.Result;
+            Variables.isKilled = true;
+        }
     }
 
     void FixedUpdate()
@@ -141,11 +147,7 @@ public class PlayerController : BaseCharactorController
     {
         base.Killed();
         animator.SetTrigger("Dead");
-        if (playerIndex == 0)
-        {
-            Variables.screenState = ScreenState.Result;
-            Variables.isKilled = true;
-        }
+
     }
 
     public void Stop()

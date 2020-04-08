@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5639027786616167537
 Transform:
   m_ObjectHideFlags: 0
@@ -403,6 +403,7 @@ MonoBehaviour:
   sizeUpText: {fileID: 5687452279869003602}
   infoBGSprite: {fileID: 4760874600609888427}
   animator: {fileID: 284104722918650677}
+  skinnedMeshRenderer: {fileID: 7073255522811328026}
 --- !u!195 &7044175816580704830
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1906,6 +1907,12 @@ GameObject:
 --- !u!4 &7192687838724465796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4888045419233748, guid: a1c8fbfa98ba54e4b8b503678d09a1b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7187976855497844048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7073255522811328026 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137802555992347466, guid: a1c8fbfa98ba54e4b8b503678d09a1b5,
     type: 3}
   m_PrefabInstance: {fileID: 7187976855497844048}
   m_PrefabAsset: {fileID: 0}

@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < Variables.playerProperties.Length; i++)
         {
             Variables.playerProperties[i] = new PlayerProperty();
-            Variables.playerProperties[i].name = "Player " + i;
+            Variables.playerProperties[i].name = PlayerSettingSO.i.playerSettings[i].name;
             Variables.playerProperties[i].playerIndex = i;
         }
 
