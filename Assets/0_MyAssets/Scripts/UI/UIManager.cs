@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
     public static void RuntimeInitializeApplication()
     {
         //ここが呼ばれてからStart()が呼ばれる
-        SceneManager.LoadScene("UIScene");
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
         QualitySettings.vSyncCount = 0; // VSyncをOFFにする
         Application.targetFrameRate = 60; // ターゲットフレームレートを60に設定
     }
