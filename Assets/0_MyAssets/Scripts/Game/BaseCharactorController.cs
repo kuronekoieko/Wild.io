@@ -35,7 +35,7 @@ public class BaseCharactorController : MonoBehaviour
         eatenCountText.transform.LookAt(Camera.main.transform.position);
     }
 
-    public void Killed()
+    public virtual void Killed()
     {
         float duration = 1.0f;
 

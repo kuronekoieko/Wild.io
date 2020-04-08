@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FeedController : BaseCharactorController
 {
-
+    [SerializeField] Animator animator;
     Rigidbody rb;
     float timer;
     Vector3 walkVec;
@@ -46,6 +46,12 @@ public class FeedController : BaseCharactorController
         //落下しなくなるため、上に飛ばないようにする
         if (rb.velocity.y < 0) vel.y = rb.velocity.y;
         rb.velocity = vel;
+    }
+
+    public override void Killed()
+    {
+        base.Killed();
+        animator.SetTrigger("Dead");
     }
 
     public static float Vector2ToDegree(Vector2 vec)
