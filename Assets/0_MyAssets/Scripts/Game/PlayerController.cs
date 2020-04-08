@@ -71,16 +71,7 @@ public class PlayerController : BaseCharactorController
 
     public override void OnUpdate()
     {
-        if (base.charactorState == CharactorState.DeadAnim)
-        {
-            animator.SetTrigger("Dead");
-        }
-        if (base.charactorState == CharactorState.Dead && playerIndex == 0)
-        {
-            Variables.screenState = ScreenState.Result;
-            Variables.isKilled = true;
 
-        }
     }
 
     void FixedUpdate()
@@ -143,6 +134,18 @@ public class PlayerController : BaseCharactorController
         }
 
         OnCollisionCharactor(col);
+    }
+
+
+    public override void Killed()
+    {
+        base.Killed();
+        animator.SetTrigger("Dead");
+        if (playerIndex == 0)
+        {
+            Variables.screenState = ScreenState.Result;
+            Variables.isKilled = true;
+        }
     }
 
     public void Stop()
@@ -230,7 +233,7 @@ public class PlayerController : BaseCharactorController
         walkSpeed += 10;
         sizeUpPS.Play();
         sizeUpTextAnim();
-        Debug.Log(name + " " + size);
+        //        Debug.Log(name + " " + size);
     }
 
     void sizeUpTextAnim()
