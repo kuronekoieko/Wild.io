@@ -39,10 +39,9 @@ public class PlayerController : BaseCharactorController
         agent = GetComponent<NavMeshAgent>();
         transform.localScale = Vector3.one;
         maxSize = Variables.playerSizes.Last().size;
-
+        sizeUpText.gameObject.SetActive(playerIndex == 0);
         skinnedMeshRenderer.material.color = PlayerSettingSO.i.playerSettings[playerIndex].color;
         type = (playerIndex == 0) ? PlayerType.Player : PlayerType.Enemy;
-
         switch (type)
         {
             case PlayerType.Player:

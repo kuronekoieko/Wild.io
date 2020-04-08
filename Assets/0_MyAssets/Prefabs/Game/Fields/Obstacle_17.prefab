@@ -63,7 +63,7 @@ MonoBehaviour:
   hideObject: {fileID: 7928835627258720638}
   eatenCountTextPrefab: {fileID: 3831832223212193232, guid: 9baa3d5f359664f65895b4f2c2273724,
     type: 3}
-  size: 7
+  size: 6
 --- !u!1 &7928835627258720638
 GameObject:
   m_ObjectHideFlags: 0
