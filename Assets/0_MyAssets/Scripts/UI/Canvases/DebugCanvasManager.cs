@@ -15,7 +15,7 @@ public class DebugCanvasManager : BaseCanvasManager
 
     public override void OnStart()
     {
-        //gameObject.SetActive(Debug.isDebugBuild);
+        gameObject.SetActive(Debug.isDebugBuild);
         debugPanel.gameObject.SetActive(false);
         openButton.onClick.AddListener(OnClickOpenButton);
         hideButton.onClick.AddListener(OnClickHideButton);
